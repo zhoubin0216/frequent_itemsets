@@ -103,6 +103,36 @@ def _count_candidates(
     return counts
 
 
+def _mine_level(
+    baskets: list[Itemset],
+    min_support: int,
+    previous_frequent: set[Itemset],
+    size: int,
+    supports: dict[Itemset, int],
+    levels: list[LevelStats],
+) -> None:
+    """Mine one level and then recurse with its frequent itemsets."""
+    if not previous_frequent:
+        return
+
+    candidates = _join_and_prune(previous_frequent, size)
+    if not candidates:
+        return
+
+    candidate_counts = _count_candidates(baskets, candidates, size)
+    current_frequent = set()
+    for itemset, count in candidate_counts.items():
+        if count >= min_support:
+            current_frequent.add(itemset)
+            supports[itemset] = count
+
+    levels.append(LevelStats(size, len(candidates), len(current_frequent)))
+
+    # The next level only needs the frequent itemsets from this level.
+    del candidates, candidate_counts
+    _mine_level(baskets, min_support, current_frequent, size + 1, supports, levels)
+
+
 def apriori(transactions: Iterable[Iterable[int]], min_support: int) -> MiningResult:
     """Return exact support counts for all nonempty itemsets meeting min_support."""
     if min_support < 1:
@@ -123,24 +153,8 @@ def apriori(transactions: Iterable[Iterable[int]], min_support: int) -> MiningRe
             supports[(item,)] = count
 
     levels = [LevelStats(1, len(singleton_counts), len(supports))]
-    previous_frequent = set(supports)
-
-    size = 2
-    while previous_frequent:
-        candidates = _join_and_prune(previous_frequent, size)
-        if not candidates:
-            break
-
-        candidate_counts = _count_candidates(baskets, candidates, size)
-        current_frequent = set()
-        for itemset, count in candidate_counts.items():
-            if count >= min_support:
-                current_frequent.add(itemset)
-                supports[itemset] = count
-
-        levels.append(LevelStats(size, len(candidates), len(current_frequent)))
-        previous_frequent = current_frequent
-        size += 1
+    frequent_singletons = set(supports)
+    _mine_level(baskets, min_support, frequent_singletons, 2, supports, levels)
 
     return MiningResult(len(baskets), supports, levels)
 
