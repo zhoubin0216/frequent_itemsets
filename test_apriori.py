@@ -26,10 +26,12 @@ class AprioriTests(unittest.TestCase):
             },
         )
 
-        rules = set(generate_rules(result.supports, Fraction(2, 3)))
-        exact = Rule((3,), (1, 2), support=2, antecedent_support=3)
-        self.assertIn(exact, rules)
-        self.assertNotIn(exact, set(generate_rules(result.supports, Fraction(67, 100))))
+        exact_rule = Rule((3,), (1, 2), support=2, antecedent_support=3)
+        rules_at_exact_threshold = list(generate_rules(result.supports, Fraction(2, 3)))
+        self.assertIn(exact_rule, rules_at_exact_threshold)
+
+        rules_at_higher_threshold = list(generate_rules(result.supports, Fraction(67, 100)))
+        self.assertNotIn(exact_rule, rules_at_higher_threshold)
 
     def test_missing_subset_prunes_the_join(self):
         result = apriori([[1, 2], [1, 3]], 1)
@@ -38,40 +40,56 @@ class AprioriTests(unittest.TestCase):
     def test_matches_exhaustive_search(self):
         random = Random(2222)
         items = range(6)
-        subsets = {
-            subset: frozenset(subset)
-            for size in range(1, 7)
-            for subset in combinations(items, size)
-        }
+        subsets = {}
+        for size in range(1, len(items) + 1):
+            for itemset in combinations(items, size):
+                subsets[itemset] = set(itemset)
 
         for trial in range(25):
-            baskets = [
-                {item for item in items if random.choice((True, False))}
-                for _ in range(trial % 10)
-            ]
-            support = random.randint(1, 5)
-            confidence = random.choice((Fraction(0), Fraction(2, 3), Fraction(1)))
-            all_counts = {
-                items: sum(subset <= basket for basket in baskets)
-                for items, subset in subsets.items()
-            }
-            expected_supports = {items: count for items, count in all_counts.items()
-                                 if count >= support}
+            baskets = []
+            for _ in range(trial % 10):
+                basket = set()
+                for item in items:
+                    if random.choice((True, False)):
+                        basket.add(item)
+                baskets.append(basket)
+
+            min_support = random.randint(1, 5)
+            min_confidence = random.choice((Fraction(0), Fraction(2, 3), Fraction(1)))
+
+            all_counts = {}
+            expected_supports = {}
+            for itemset, subset in subsets.items():
+                count = 0
+                for basket in baskets:
+                    if subset.issubset(basket):
+                        count += 1
+                all_counts[itemset] = count
+                if count >= min_support:
+                    expected_supports[itemset] = count
+
             expected_rules = set()
             for antecedent, antecedent_items in subsets.items():
                 for consequent, consequent_items in subsets.items():
-                    if antecedent_items.isdisjoint(consequent_items):
-                        union = tuple(sorted(antecedent_items | consequent_items))
-                        joint = all_counts[union]
-                        if joint >= support and Fraction(joint, all_counts[antecedent]) >= confidence:
-                            expected_rules.add(
-                                Rule(antecedent, consequent, joint, all_counts[antecedent])
-                            )
+                    if not antecedent_items.isdisjoint(consequent_items):
+                        continue
 
-            with self.subTest(trial=trial, support=support, confidence=confidence):
-                result = apriori(baskets, support)
+                    union = tuple(sorted(antecedent_items.union(consequent_items)))
+                    joint_support = all_counts[union]
+                    if joint_support < min_support:
+                        continue
+
+                    antecedent_support = all_counts[antecedent]
+                    confidence = Fraction(joint_support, antecedent_support)
+                    if confidence >= min_confidence:
+                        rule = Rule(antecedent, consequent, joint_support, antecedent_support)
+                        expected_rules.add(rule)
+
+            with self.subTest(trial=trial, support=min_support, confidence=min_confidence):
+                result = apriori(baskets, min_support)
+                actual_rules = list(generate_rules(result.supports, min_confidence))
                 self.assertEqual(result.supports, expected_supports)
-                self.assertCountEqual(generate_rules(result.supports, confidence), expected_rules)
+                self.assertCountEqual(actual_rules, expected_rules)
 
 
 if __name__ == "__main__":

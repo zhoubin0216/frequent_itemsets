@@ -1,10 +1,9 @@
 """Level-wise Apriori mining and association rule generation."""
 
-from collections import Counter
 from collections.abc import Iterable, Iterator, Mapping
 from dataclasses import dataclass
 from fractions import Fraction
-from itertools import combinations, groupby
+from itertools import combinations
 from pathlib import Path
 
 Itemset = tuple[int, ...]
@@ -40,37 +39,67 @@ def read_transactions(path: Path) -> Iterator[Itemset]:
     """Read a basket of whitespace-separated integer IDs from each nonblank line."""
     with path.open(encoding="utf-8") as dataset:
         for line_number, line in enumerate(dataset, start=1):
-            items = line.split()
-            if items:
-                try:
-                    yield tuple(map(int, items))
-                except ValueError as error:
-                    raise ValueError(
-                        f"{path}:{line_number}: expected whitespace-separated integer item IDs"
-                    ) from error
+            item_ids = line.split()
+            if not item_ids:
+                continue
+
+            transaction = []
+            try:
+                for item_id in item_ids:
+                    transaction.append(int(item_id))
+            except ValueError as error:
+                raise ValueError(
+                    f"{path}:{line_number}: expected whitespace-separated integer item IDs"
+                ) from error
+
+            yield tuple(transaction)
 
 
-def _join_and_prune(previous: set[Itemset], size: int) -> set[Itemset]:
+def _join_and_prune(previous_frequent: set[Itemset], size: int) -> set[Itemset]:
     """Join equal prefixes, then require every immediate subset to be frequent."""
+    itemsets_by_prefix: dict[Itemset, list[Itemset]] = {}
+    for itemset in sorted(previous_frequent):
+        prefix = itemset[:-1]
+        if prefix not in itemsets_by_prefix:
+            itemsets_by_prefix[prefix] = []
+        itemsets_by_prefix[prefix].append(itemset)
+
     candidates = set()
-    for _, group in groupby(sorted(previous), key=lambda itemset: itemset[:-1]):
-        for left, right in combinations(group, 2):
-            candidate = (*left, right[-1])
-            if all(subset in previous for subset in combinations(candidate, size - 1)):
+    for prefix_group in itemsets_by_prefix.values():
+        for left, right in combinations(prefix_group, 2):
+            # Both itemsets share a prefix. Append the larger of their last items.
+            candidate = left + (right[-1],)
+            all_subsets_frequent = True
+            for subset in combinations(candidate, size - 1):
+                if subset not in previous_frequent:
+                    all_subsets_frequent = False
+                    break
+
+            if all_subsets_frequent:
                 candidates.add(candidate)
+
     return candidates
 
 
 def _count_candidates(
     baskets: list[Itemset], candidates: set[Itemset], size: int
-) -> Counter[Itemset]:
-    active_items = {item for candidate in candidates for item in candidate}
-    counts: Counter[Itemset] = Counter()
+) -> dict[Itemset, int]:
+    active_items = set()
+    for candidate in candidates:
+        for item in candidate:
+            active_items.add(item)
+
+    counts: dict[Itemset, int] = {}
     for basket in baskets:
-        filtered = tuple(item for item in basket if item in active_items)
-        for subset in combinations(filtered, size):
+        filtered_basket = []
+        for item in basket:
+            if item in active_items:
+                filtered_basket.append(item)
+
+        for subset in combinations(filtered_basket, size):
             if subset in candidates:
-                counts[subset] += 1
+                counts[subset] = counts.get(subset, 0) + 1
+
     return counts
 
 
@@ -80,28 +109,37 @@ def apriori(transactions: Iterable[Iterable[int]], min_support: int) -> MiningRe
         raise ValueError("minimum support must be a positive transaction count")
 
     baskets = []
-    singleton_counts: Counter[int] = Counter()
+    singleton_counts: dict[int, int] = {}
     for transaction in transactions:
+        # Count each item once per transaction and keep a consistent order.
         basket = tuple(sorted(set(transaction)))
         baskets.append(basket)
-        singleton_counts.update(basket)
+        for item in basket:
+            singleton_counts[item] = singleton_counts.get(item, 0) + 1
 
-    supports = {
-        (item,): count for item, count in singleton_counts.items() if count >= min_support
-    }
+    supports: dict[Itemset, int] = {}
+    for item, count in singleton_counts.items():
+        if count >= min_support:
+            supports[(item,)] = count
+
     levels = [LevelStats(1, len(singleton_counts), len(supports))]
-    previous = set(supports)
+    previous_frequent = set(supports)
+
     size = 2
-    while previous:
-        candidates = _join_and_prune(previous, size)
+    while previous_frequent:
+        candidates = _join_and_prune(previous_frequent, size)
         if not candidates:
             break
 
-        counts = _count_candidates(baskets, candidates, size)
-        frequent = {itemset: count for itemset, count in counts.items() if count >= min_support}
-        levels.append(LevelStats(size, len(candidates), len(frequent)))
-        supports.update(frequent)
-        previous = set(frequent)
+        candidate_counts = _count_candidates(baskets, candidates, size)
+        current_frequent = set()
+        for itemset, count in candidate_counts.items():
+            if count >= min_support:
+                current_frequent.add(itemset)
+                supports[itemset] = count
+
+        levels.append(LevelStats(size, len(candidates), len(current_frequent)))
+        previous_frequent = current_frequent
         size += 1
 
     return MiningResult(len(baskets), supports, levels)
@@ -114,13 +152,23 @@ def generate_rules(
     if not 0 <= min_confidence <= 1:
         raise ValueError("minimum confidence must be between 0 and 1")
 
-    for itemset, support in supports.items():
-        for size in range(1, len(itemset)):
-            for antecedent in combinations(itemset, size):
+    for itemset, joint_support in supports.items():
+        for antecedent_size in range(1, len(itemset)):
+            for antecedent in combinations(itemset, antecedent_size):
                 antecedent_support = supports[antecedent]
-                if support * min_confidence.denominator >= (
-                    antecedent_support * min_confidence.numerator
-                ):
-                    antecedent_items = set(antecedent)
-                    consequent = tuple(item for item in itemset if item not in antecedent_items)
-                    yield Rule(antecedent, consequent, support, antecedent_support)
+                confidence = Fraction(joint_support, antecedent_support)
+                if confidence < min_confidence:
+                    continue
+
+                antecedent_items = set(antecedent)
+                consequent_items = []
+                for item in itemset:
+                    if item not in antecedent_items:
+                        consequent_items.append(item)
+
+                yield Rule(
+                    antecedent=antecedent,
+                    consequent=tuple(consequent_items),
+                    support=joint_support,
+                    antecedent_support=antecedent_support,
+                )

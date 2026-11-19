@@ -2,13 +2,12 @@
 
 import argparse
 import json
-from dataclasses import asdict
 from decimal import Decimal, InvalidOperation
 from fractions import Fraction
 from pathlib import Path
 from time import perf_counter
 
-from apriori import apriori, generate_rules, read_transactions
+from apriori import Itemset, MiningResult, Rule, apriori, generate_rules, read_transactions
 
 DEFAULT_DATASET = Path(__file__).resolve().with_name("T10I4D100K.dat")
 
@@ -33,6 +32,96 @@ def confidence_threshold(value: str) -> Decimal:
     return confidence
 
 
+def itemset_preview_order(entry: tuple[Itemset, int]) -> tuple[int, int, Itemset]:
+    itemset, support = entry
+    # Sort larger support counts first, then break ties by size and item IDs.
+    return -support, len(itemset), itemset
+
+
+def itemset_export_order(entry: tuple[Itemset, int]) -> tuple[int, Itemset]:
+    itemset, _ = entry
+    return len(itemset), itemset
+
+
+def rule_output_order(rule: Rule) -> tuple[Fraction, int, Itemset, Itemset]:
+    # Sort confidence and support from highest to lowest.
+    return -rule.confidence, -rule.support, rule.antecedent, rule.consequent
+
+
+def print_itemset_summary(
+    result: MiningResult, min_support: int, mining_seconds: float
+) -> None:
+    print(f"Transactions: {result.transaction_count:,}")
+    print(f"Minimum support: {min_support:,} transactions")
+    print(f"{'Size':>4} {'Candidates':>12} {'Frequent':>12}")
+    for level in result.levels:
+        print(f"{level.size:>4} {level.candidates:>12,} {level.frequent:>12,}")
+    print(f"Frequent itemsets: {len(result.supports):,}")
+    print(f"Mining time (including input): {mining_seconds:.3f} s")
+
+    top_itemsets = sorted(result.supports.items(), key=itemset_preview_order)
+    for itemset, support in top_itemsets[:5]:
+        print(f"  {itemset}  support={support}")
+
+
+def print_rule_summary(
+    rules: list[Rule], min_confidence: Decimal, rules_seconds: float
+) -> None:
+    print(f"Rules at confidence >= {min_confidence}: {len(rules):,}")
+    print(f"Rule generation time: {rules_seconds:.3f} s")
+    for rule in rules[:5]:
+        confidence = float(rule.confidence)
+        print(
+            f"  {rule.antecedent} -> {rule.consequent}  "
+            f"support={rule.support}  confidence={confidence:.6f}"
+        )
+
+
+def save_results(args: argparse.Namespace, result: MiningResult, rules: list[Rule]) -> None:
+    level_rows = []
+    for level in result.levels:
+        level_rows.append({
+            "size": level.size,
+            "candidates": level.candidates,
+            "frequent": level.frequent,
+        })
+
+    itemset_rows = []
+    sorted_itemsets = sorted(result.supports.items(), key=itemset_export_order)
+    for itemset, support in sorted_itemsets:
+        itemset_rows.append({"items": itemset, "support": support})
+
+    rule_rows = []
+    for rule in rules:
+        rule_rows.append({
+            "antecedent": rule.antecedent,
+            "consequent": rule.consequent,
+            "support": rule.support,
+            "antecedent_support": rule.antecedent_support,
+            "confidence": float(rule.confidence),
+        })
+
+    min_confidence = None
+    if args.min_confidence is not None:
+        min_confidence = float(args.min_confidence)
+
+    payload = {
+        "dataset": args.dataset.name,
+        "transaction_count": result.transaction_count,
+        "min_support": args.min_support,
+        "min_confidence": min_confidence,
+        "levels": level_rows,
+        "frequent_itemsets": itemset_rows,
+        "rules": rule_rows,
+    }
+
+    output_path = args.output
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    json_text = json.dumps(payload, indent=2)
+    output_path.write_text(json_text + "\n", encoding="utf-8")
+    print(f"JSON output: {output_path}")
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("dataset", type=Path, nargs="?", default=DEFAULT_DATASET)
@@ -55,63 +144,22 @@ def main() -> None:
             parser.error("output path must differ from the input dataset")
 
         start = perf_counter()
-        result = apriori(read_transactions(args.dataset), args.min_support)
+        transactions = read_transactions(args.dataset)
+        result = apriori(transactions, args.min_support)
         mining_seconds = perf_counter() - start
+        print_itemset_summary(result, args.min_support, mining_seconds)
 
         rules = []
-        rules_seconds = None
         if args.min_confidence is not None:
             start = perf_counter()
-            rules = list(generate_rules(result.supports, Fraction(args.min_confidence)))
+            min_confidence = Fraction(args.min_confidence)
+            rules = list(generate_rules(result.supports, min_confidence))
             rules_seconds = perf_counter() - start
-
-        print(f"Transactions: {result.transaction_count:,}")
-        print(f"Minimum support: {args.min_support:,} transactions")
-        print(f"{'Size':>4} {'Candidates':>12} {'Frequent':>12}")
-        for level in result.levels:
-            print(f"{level.size:>4} {level.candidates:>12,} {level.frequent:>12,}")
-        print(f"Frequent itemsets: {len(result.supports):,}")
-        print(f"Mining time (including input): {mining_seconds:.3f} s")
-        top_itemsets = sorted(
-            result.supports.items(), key=lambda pair: (-pair[1], len(pair[0]), pair[0])
-        )
-        for itemset, support in top_itemsets[:5]:
-            print(f"  {itemset}  support={support}")
-
-        if rules_seconds is not None:
-            print(f"Rules at confidence >= {args.min_confidence}: {len(rules):,}")
-            print(f"Rule generation time: {rules_seconds:.3f} s")
-            rules.sort(
-                key=lambda rule: (-rule.confidence, -rule.support, rule.antecedent, rule.consequent)
-            )
-            for rule in rules[:5]:
-                print(
-                    f"  {rule.antecedent} -> {rule.consequent}  "
-                    f"support={rule.support}  confidence={float(rule.confidence):.6f}"
-                )
+            rules.sort(key=rule_output_order)
+            print_rule_summary(rules, args.min_confidence, rules_seconds)
 
         if args.output is not None:
-            payload = {
-                "dataset": args.dataset.name,
-                "transaction_count": result.transaction_count,
-                "min_support": args.min_support,
-                "min_confidence": float(args.min_confidence)
-                if args.min_confidence is not None
-                else None,
-                "levels": [asdict(level) for level in result.levels],
-                "frequent_itemsets": [
-                    {"items": items, "support": support}
-                    for items, support in sorted(
-                        result.supports.items(), key=lambda pair: (len(pair[0]), pair[0])
-                    )
-                ],
-                "rules": [
-                    {**asdict(rule), "confidence": float(rule.confidence)} for rule in rules
-                ],
-            }
-            args.output.parent.mkdir(parents=True, exist_ok=True)
-            args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-            print(f"JSON output: {args.output}")
+            save_results(args, result, rules)
     except (OSError, ValueError) as error:
         parser.error(str(error))
 
