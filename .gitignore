@@ -1,0 +1,8 @@
+__pycache__/
+.venv/
+.DS_Store
+/.idea/*
+!/.idea/runConfigurations/
+!/.idea/Assignment2.iml
+!/.idea/modules.xml
+/T10I4D100K.dat

@@ -1,0 +1,2406 @@
+{
+  "dataset": "T10I4D100K.dat",
+  "transaction_count": 100000,
+  "min_support": 1000,
+  "min_confidence": 0.6,
+  "levels": [
+    {
+      "size": 1,
+      "candidates": 870,
+      "frequent": 375
+    },
+    {
+      "size": 2,
+      "candidates": 70125,
+      "frequent": 9
+    },
+    {
+      "size": 3,
+      "candidates": 1,
+      "frequent": 1
+    }
+  ],
+  "frequent_itemsets": [
+    {
+      "items": [
+        1
+      ],
+      "support": 1535
+    },
+    {
+      "items": [
+        4
+      ],
+      "support": 1394
+    },
+    {
+      "items": [
+        5
+      ],
+      "support": 1094
+    },
+    {
+      "items": [
+        6
+      ],
+      "support": 2149
+    },
+    {
+      "items": [
+        8
+      ],
+      "support": 3090
+    },
+    {
+      "items": [
+        10
+      ],
+      "support": 1351
+    },
+    {
+      "items": [
+        12
+      ],
+      "support": 3415
+    },
+    {
+      "items": [
+        17
+      ],
+      "support": 1683
+    },
+    {
+      "items": [
+        21
+      ],
+      "support": 2666
+    },
+    {
+      "items": [
+        25
+      ],
+      "support": 1395
+    },
+    {
+      "items": [
+        27
+      ],
+      "support": 2165
+    },
+    {
+      "items": [
+        28
+      ],
+      "support": 1454
+    },
+    {
+      "items": [
+        31
+      ],
+      "support": 1666
+    },
+    {
+      "items": [
+        32
+      ],
+      "support": 4248
+    },
+    {
+      "items": [
+        33
+      ],
+      "support": 1460
+    },
+    {
+      "items": [
+        35
+      ],
+      "support": 1984
+    },
+    {
+      "items": [
+        37
+      ],
+      "support": 1249
+    },
+    {
+      "items": [
+        38
+      ],
+      "support": 2402
+    },
+    {
+      "items": [
+        39
+      ],
+      "support": 4258
+    },
+    {
+      "items": [
+        41
+      ],
+      "support": 1353
+    },
+    {
+      "items": [
+        43
+      ],
+      "support": 1721
+    },
+    {
+      "items": [
+        45
+      ],
+      "support": 1728
+    },
+    {
+      "items": [
+        48
+      ],
+      "support": 2472
+    },
+    {
+      "items": [
+        51
+      ],
+      "support": 1612
+    },
+    {
+      "items": [
+        52
+      ],
+      "support": 1983
+    },
+    {
+      "items": [
+        54
+      ],
+      "support": 2595
+    },
+    {
+      "items": [
+        55
+      ],
+      "support": 1959
+    },
+    {
+      "items": [
+        57
+      ],
+      "support": 2743
+    },
+    {
+      "items": [
+        58
+      ],
+      "support": 1330
+    },
+    {
+      "items": [
+        68
+      ],
+      "support": 1601
+    },
+    {
+      "items": [
+        69
+      ],
+      "support": 2370
+    },
+    {
+      "items": [
+        70
+      ],
+      "support": 2411
+    },
+    {
+      "items": [
+        71
+      ],
+      "support": 3507
+    },
+    {
+      "items": [
+        72
+      ],
+      "support": 2852
+    },
+    {
+      "items": [
+        73
+      ],
+      "support": 2179
+    },
+    {
+      "items": [
+        75
+      ],
+      "support": 3151
+    },
+    {
+      "items": [
+        78
+      ],
+      "support": 2471
+    },
+    {
+      "items": [
+        85
+      ],
+      "support": 1555
+    },
+    {
+      "items": [
+        90
+      ],
+      "support": 1875
+    },
+    {
+      "items": [
+        93
+      ],
+      "support": 2777
+    },
+    {
+      "items": [
+        94
+      ],
+      "support": 1201
+    },
+    {
+      "items": [
+        97
+      ],
+      "support": 1466
+    },
+    {
+      "items": [
+        100
+      ],
+      "support": 1749
+    },
+    {
+      "items": [
+        104
+      ],
+      "support": 1158
+    },
+    {
+      "items": [
+        105
+      ],
+      "support": 1100
+    },
+    {
+      "items": [
+        110
+      ],
+      "support": 1801
+    },
+    {
+      "items": [
+        111
+      ],
+      "support": 1171
+    },
+    {
+      "items": [
+        112
+      ],
+      "support": 2680
+    },
+    {
+      "items": [
+        115
+      ],
+      "support": 1775
+    },
+    {
+      "items": [
+        116
+      ],
+      "support": 2193
+    },
+    {
+      "items": [
+        120
+      ],
+      "support": 4973
+    },
+    {
+      "items": [
+        122
+      ],
+      "support": 1081
+    },
+    {
+      "items": [
+        125
+      ],
+      "support": 1287
+    },
+    {
+      "items": [
+        126
+      ],
+      "support": 1075
+    },
+    {
+      "items": [
+        129
+      ],
+      "support": 1547
+    },
+    {
+      "items": [
+        130
+      ],
+      "support": 1711
+    },
+    {
+      "items": [
+        132
+      ],
+      "support": 2641
+    },
+    {
+      "items": [
+        140
+      ],
+      "support": 2687
+    },
+    {
+      "items": [
+        143
+      ],
+      "support": 1417
+    },
+    {
+      "items": [
+        145
+      ],
+      "support": 4559
+    },
+    {
+      "items": [
+        147
+      ],
+      "support": 1383
+    },
+    {
+      "items": [
+        151
+      ],
+      "support": 2611
+    },
+    {
+      "items": [
+        154
+      ],
+      "support": 1447
+    },
+    {
+      "items": [
+        157
+      ],
+      "support": 1140
+    },
+    {
+      "items": [
+        161
+      ],
+      "support": 2320
+    },
+    {
+      "items": [
+        162
+      ],
+      "support": 1450
+    },
+    {
+      "items": [
+        163
+      ],
+      "support": 1256
+    },
+    {
+      "items": [
+        168
+      ],
+      "support": 1538
+    },
+    {
+      "items": [
+        170
+      ],
+      "support": 1203
+    },
+    {
+      "items": [
+        171
+      ],
+      "support": 1097
+    },
+    {
+      "items": [
+        173
+      ],
+      "support": 1080
+    },
+    {
+      "items": [
+        175
+      ],
+      "support": 2791
+    },
+    {
+      "items": [
+        177
+      ],
+      "support": 4629
+    },
+    {
+      "items": [
+        181
+      ],
+      "support": 1235
+    },
+    {
+      "items": [
+        183
+      ],
+      "support": 3883
+    },
+    {
+      "items": [
+        185
+      ],
+      "support": 1529
+    },
+    {
+      "items": [
+        192
+      ],
+      "support": 2004
+    },
+    {
+      "items": [
+        196
+      ],
+      "support": 2096
+    },
+    {
+      "items": [
+        197
+      ],
+      "support": 1230
+    },
+    {
+      "items": [
+        198
+      ],
+      "support": 1461
+    },
+    {
+      "items": [
+        201
+      ],
+      "support": 1029
+    },
+    {
+      "items": [
+        204
+      ],
+      "support": 2174
+    },
+    {
+      "items": [
+        205
+      ],
+      "support": 3605
+    },
+    {
+      "items": [
+        207
+      ],
+      "support": 1214
+    },
+    {
+      "items": [
+        208
+      ],
+      "support": 1483
+    },
+    {
+      "items": [
+        210
+      ],
+      "support": 2009
+    },
+    {
+      "items": [
+        214
+      ],
+      "support": 1893
+    },
+    {
+      "items": [
+        217
+      ],
+      "support": 5375
+    },
+    {
+      "items": [
+        227
+      ],
+      "support": 1818
+    },
+    {
+      "items": [
+        229
+      ],
+      "support": 2281
+    },
+    {
+      "items": [
+        234
+      ],
+      "support": 1416
+    },
+    {
+      "items": [
+        236
+      ],
+      "support": 2618
+    },
+    {
+      "items": [
+        239
+      ],
+      "support": 2742
+    },
+    {
+      "items": [
+        240
+      ],
+      "support": 1399
+    },
+    {
+      "items": [
+        242
+      ],
+      "support": 2325
+    },
+    {
+      "items": [
+        258
+      ],
+      "support": 1036
+    },
+    {
+      "items": [
+        259
+      ],
+      "support": 1522
+    },
+    {
+      "items": [
+        265
+      ],
+      "support": 1359
+    },
+    {
+      "items": [
+        266
+      ],
+      "support": 1022
+    },
+    {
+      "items": [
+        274
+      ],
+      "support": 2628
+    },
+    {
+      "items": [
+        275
+      ],
+      "support": 1692
+    },
+    {
+      "items": [
+        276
+      ],
+      "support": 2479
+    },
+    {
+      "items": [
+        279
+      ],
+      "support": 3014
+    },
+    {
+      "items": [
+        280
+      ],
+      "support": 2108
+    },
+    {
+      "items": [
+        283
+      ],
+      "support": 4082
+    },
+    {
+      "items": [
+        285
+      ],
+      "support": 2600
+    },
+    {
+      "items": [
+        290
+      ],
+      "support": 1793
+    },
+    {
+      "items": [
+        294
+      ],
+      "support": 1445
+    },
+    {
+      "items": [
+        296
+      ],
+      "support": 2210
+    },
+    {
+      "items": [
+        308
+      ],
+      "support": 1402
+    },
+    {
+      "items": [
+        309
+      ],
+      "support": 1262
+    },
+    {
+      "items": [
+        310
+      ],
+      "support": 1390
+    },
+    {
+      "items": [
+        319
+      ],
+      "support": 1371
+    },
+    {
+      "items": [
+        322
+      ],
+      "support": 1154
+    },
+    {
+      "items": [
+        325
+      ],
+      "support": 1022
+    },
+    {
+      "items": [
+        326
+      ],
+      "support": 1488
+    },
+    {
+      "items": [
+        332
+      ],
+      "support": 1861
+    },
+    {
+      "items": [
+        334
+      ],
+      "support": 2146
+    },
+    {
+      "items": [
+        335
+      ],
+      "support": 1345
+    },
+    {
+      "items": [
+        336
+      ],
+      "support": 1071
+    },
+    {
+      "items": [
+        343
+      ],
+      "support": 1599
+    },
+    {
+      "items": [
+        346
+      ],
+      "support": 3470
+    },
+    {
+      "items": [
+        348
+      ],
+      "support": 1226
+    },
+    {
+      "items": [
+        349
+      ],
+      "support": 2041
+    },
+    {
+      "items": [
+        350
+      ],
+      "support": 3069
+    },
+    {
+      "items": [
+        351
+      ],
+      "support": 1641
+    },
+    {
+      "items": [
+        354
+      ],
+      "support": 5835
+    },
+    {
+      "items": [
+        357
+      ],
+      "support": 1142
+    },
+    {
+      "items": [
+        361
+      ],
+      "support": 1104
+    },
+    {
+      "items": [
+        362
+      ],
+      "support": 4388
+    },
+    {
+      "items": [
+        366
+      ],
+      "support": 1031
+    },
+    {
+      "items": [
+        368
+      ],
+      "support": 7828
+    },
+    {
+      "items": [
+        373
+      ],
+      "support": 2007
+    },
+    {
+      "items": [
+        377
+      ],
+      "support": 1149
+    },
+    {
+      "items": [
+        378
+      ],
+      "support": 1149
+    },
+    {
+      "items": [
+        381
+      ],
+      "support": 2959
+    },
+    {
+      "items": [
+        385
+      ],
+      "support": 1676
+    },
+    {
+      "items": [
+        387
+      ],
+      "support": 2089
+    },
+    {
+      "items": [
+        390
+      ],
+      "support": 2685
+    },
+    {
+      "items": [
+        392
+      ],
+      "support": 2420
+    },
+    {
+      "items": [
+        394
+      ],
+      "support": 1145
+    },
+    {
+      "items": [
+        401
+      ],
+      "support": 3667
+    },
+    {
+      "items": [
+        403
+      ],
+      "support": 1722
+    },
+    {
+      "items": [
+        405
+      ],
+      "support": 1525
+    },
+    {
+      "items": [
+        411
+      ],
+      "support": 2047
+    },
+    {
+      "items": [
+        413
+      ],
+      "support": 2637
+    },
+    {
+      "items": [
+        414
+      ],
+      "support": 1160
+    },
+    {
+      "items": [
+        419
+      ],
+      "support": 5057
+    },
+    {
+      "items": [
+        422
+      ],
+      "support": 1255
+    },
+    {
+      "items": [
+        423
+      ],
+      "support": 1412
+    },
+    {
+      "items": [
+        424
+      ],
+      "support": 1448
+    },
+    {
+      "items": [
+        427
+      ],
+      "support": 1856
+    },
+    {
+      "items": [
+        428
+      ],
+      "support": 1021
+    },
+    {
+      "items": [
+        429
+      ],
+      "support": 1037
+    },
+    {
+      "items": [
+        438
+      ],
+      "support": 4511
+    },
+    {
+      "items": [
+        440
+      ],
+      "support": 1943
+    },
+    {
+      "items": [
+        448
+      ],
+      "support": 1370
+    },
+    {
+      "items": [
+        449
+      ],
+      "support": 1890
+    },
+    {
+      "items": [
+        450
+      ],
+      "support": 2082
+    },
+    {
+      "items": [
+        458
+      ],
+      "support": 1124
+    },
+    {
+      "items": [
+        460
+      ],
+      "support": 4438
+    },
+    {
+      "items": [
+        461
+      ],
+      "support": 1498
+    },
+    {
+      "items": [
+        468
+      ],
+      "support": 1089
+    },
+    {
+      "items": [
+        469
+      ],
+      "support": 1502
+    },
+    {
+      "items": [
+        470
+      ],
+      "support": 4137
+    },
+    {
+      "items": [
+        471
+      ],
+      "support": 2894
+    },
+    {
+      "items": [
+        472
+      ],
+      "support": 2125
+    },
+    {
+      "items": [
+        477
+      ],
+      "support": 2462
+    },
+    {
+      "items": [
+        480
+      ],
+      "support": 2309
+    },
+    {
+      "items": [
+        486
+      ],
+      "support": 1547
+    },
+    {
+      "items": [
+        487
+      ],
+      "support": 3135
+    },
+    {
+      "items": [
+        489
+      ],
+      "support": 3420
+    },
+    {
+      "items": [
+        490
+      ],
+      "support": 1066
+    },
+    {
+      "items": [
+        494
+      ],
+      "support": 5102
+    },
+    {
+      "items": [
+        496
+      ],
+      "support": 1428
+    },
+    {
+      "items": [
+        500
+      ],
+      "support": 1444
+    },
+    {
+      "items": [
+        504
+      ],
+      "support": 1296
+    },
+    {
+      "items": [
+        509
+      ],
+      "support": 3044
+    },
+    {
+      "items": [
+        510
+      ],
+      "support": 3281
+    },
+    {
+      "items": [
+        511
+      ],
+      "support": 1015
+    },
+    {
+      "items": [
+        513
+      ],
+      "support": 1287
+    },
+    {
+      "items": [
+        515
+      ],
+      "support": 1166
+    },
+    {
+      "items": [
+        516
+      ],
+      "support": 1544
+    },
+    {
+      "items": [
+        517
+      ],
+      "support": 1201
+    },
+    {
+      "items": [
+        521
+      ],
+      "support": 1582
+    },
+    {
+      "items": [
+        522
+      ],
+      "support": 2725
+    },
+    {
+      "items": [
+        523
+      ],
+      "support": 2244
+    },
+    {
+      "items": [
+        526
+      ],
+      "support": 2793
+    },
+    {
+      "items": [
+        527
+      ],
+      "support": 1185
+    },
+    {
+      "items": [
+        529
+      ],
+      "support": 7057
+    },
+    {
+      "items": [
+        530
+      ],
+      "support": 1263
+    },
+    {
+      "items": [
+        534
+      ],
+      "support": 1531
+    },
+    {
+      "items": [
+        538
+      ],
+      "support": 3982
+    },
+    {
+      "items": [
+        540
+      ],
+      "support": 1293
+    },
+    {
+      "items": [
+        541
+      ],
+      "support": 3735
+    },
+    {
+      "items": [
+        546
+      ],
+      "support": 1050
+    },
+    {
+      "items": [
+        548
+      ],
+      "support": 2843
+    },
+    {
+      "items": [
+        550
+      ],
+      "support": 1203
+    },
+    {
+      "items": [
+        554
+      ],
+      "support": 1114
+    },
+    {
+      "items": [
+        561
+      ],
+      "support": 2783
+    },
+    {
+      "items": [
+        563
+      ],
+      "support": 1065
+    },
+    {
+      "items": [
+        567
+      ],
+      "support": 1102
+    },
+    {
+      "items": [
+        569
+      ],
+      "support": 2835
+    },
+    {
+      "items": [
+        571
+      ],
+      "support": 2902
+    },
+    {
+      "items": [
+        572
+      ],
+      "support": 1589
+    },
+    {
+      "items": [
+        573
+      ],
+      "support": 1229
+    },
+    {
+      "items": [
+        574
+      ],
+      "support": 1297
+    },
+    {
+      "items": [
+        576
+      ],
+      "support": 1337
+    },
+    {
+      "items": [
+        577
+      ],
+      "support": 1695
+    },
+    {
+      "items": [
+        578
+      ],
+      "support": 1290
+    },
+    {
+      "items": [
+        579
+      ],
+      "support": 2164
+    },
+    {
+      "items": [
+        580
+      ],
+      "support": 1667
+    },
+    {
+      "items": [
+        581
+      ],
+      "support": 2943
+    },
+    {
+      "items": [
+        583
+      ],
+      "support": 1389
+    },
+    {
+      "items": [
+        591
+      ],
+      "support": 1241
+    },
+    {
+      "items": [
+        593
+      ],
+      "support": 2601
+    },
+    {
+      "items": [
+        594
+      ],
+      "support": 1516
+    },
+    {
+      "items": [
+        597
+      ],
+      "support": 2883
+    },
+    {
+      "items": [
+        598
+      ],
+      "support": 3219
+    },
+    {
+      "items": [
+        600
+      ],
+      "support": 1192
+    },
+    {
+      "items": [
+        605
+      ],
+      "support": 1652
+    },
+    {
+      "items": [
+        606
+      ],
+      "support": 2668
+    },
+    {
+      "items": [
+        611
+      ],
+      "support": 1444
+    },
+    {
+      "items": [
+        614
+      ],
+      "support": 3134
+    },
+    {
+      "items": [
+        617
+      ],
+      "support": 2614
+    },
+    {
+      "items": [
+        618
+      ],
+      "support": 1337
+    },
+    {
+      "items": [
+        620
+      ],
+      "support": 2100
+    },
+    {
+      "items": [
+        623
+      ],
+      "support": 1845
+    },
+    {
+      "items": [
+        628
+      ],
+      "support": 1102
+    },
+    {
+      "items": [
+        630
+      ],
+      "support": 1523
+    },
+    {
+      "items": [
+        631
+      ],
+      "support": 2793
+    },
+    {
+      "items": [
+        632
+      ],
+      "support": 1070
+    },
+    {
+      "items": [
+        634
+      ],
+      "support": 2492
+    },
+    {
+      "items": [
+        638
+      ],
+      "support": 2288
+    },
+    {
+      "items": [
+        639
+      ],
+      "support": 1572
+    },
+    {
+      "items": [
+        641
+      ],
+      "support": 1494
+    },
+    {
+      "items": [
+        649
+      ],
+      "support": 1292
+    },
+    {
+      "items": [
+        651
+      ],
+      "support": 1288
+    },
+    {
+      "items": [
+        653
+      ],
+      "support": 2634
+    },
+    {
+      "items": [
+        658
+      ],
+      "support": 1881
+    },
+    {
+      "items": [
+        661
+      ],
+      "support": 2693
+    },
+    {
+      "items": [
+        663
+      ],
+      "support": 2354
+    },
+    {
+      "items": [
+        665
+      ],
+      "support": 1297
+    },
+    {
+      "items": [
+        673
+      ],
+      "support": 1635
+    },
+    {
+      "items": [
+        674
+      ],
+      "support": 2527
+    },
+    {
+      "items": [
+        675
+      ],
+      "support": 2976
+    },
+    {
+      "items": [
+        676
+      ],
+      "support": 2717
+    },
+    {
+      "items": [
+        678
+      ],
+      "support": 1329
+    },
+    {
+      "items": [
+        682
+      ],
+      "support": 4132
+    },
+    {
+      "items": [
+        684
+      ],
+      "support": 5408
+    },
+    {
+      "items": [
+        686
+      ],
+      "support": 1495
+    },
+    {
+      "items": [
+        687
+      ],
+      "support": 1762
+    },
+    {
+      "items": [
+        688
+      ],
+      "support": 1132
+    },
+    {
+      "items": [
+        692
+      ],
+      "support": 4993
+    },
+    {
+      "items": [
+        694
+      ],
+      "support": 2847
+    },
+    {
+      "items": [
+        701
+      ],
+      "support": 1283
+    },
+    {
+      "items": [
+        704
+      ],
+      "support": 1794
+    },
+    {
+      "items": [
+        706
+      ],
+      "support": 1923
+    },
+    {
+      "items": [
+        707
+      ],
+      "support": 1354
+    },
+    {
+      "items": [
+        708
+      ],
+      "support": 1090
+    },
+    {
+      "items": [
+        710
+      ],
+      "support": 1044
+    },
+    {
+      "items": [
+        716
+      ],
+      "support": 1199
+    },
+    {
+      "items": [
+        718
+      ],
+      "support": 1238
+    },
+    {
+      "items": [
+        720
+      ],
+      "support": 3864
+    },
+    {
+      "items": [
+        722
+      ],
+      "support": 5845
+    },
+    {
+      "items": [
+        733
+      ],
+      "support": 1141
+    },
+    {
+      "items": [
+        735
+      ],
+      "support": 1689
+    },
+    {
+      "items": [
+        736
+      ],
+      "support": 1470
+    },
+    {
+      "items": [
+        738
+      ],
+      "support": 2129
+    },
+    {
+      "items": [
+        740
+      ],
+      "support": 1632
+    },
+    {
+      "items": [
+        744
+      ],
+      "support": 2177
+    },
+    {
+      "items": [
+        746
+      ],
+      "support": 1982
+    },
+    {
+      "items": [
+        749
+      ],
+      "support": 1330
+    },
+    {
+      "items": [
+        752
+      ],
+      "support": 2578
+    },
+    {
+      "items": [
+        758
+      ],
+      "support": 2860
+    },
+    {
+      "items": [
+        763
+      ],
+      "support": 1862
+    },
+    {
+      "items": [
+        765
+      ],
+      "support": 1705
+    },
+    {
+      "items": [
+        766
+      ],
+      "support": 6265
+    },
+    {
+      "items": [
+        769
+      ],
+      "support": 1622
+    },
+    {
+      "items": [
+        774
+      ],
+      "support": 2046
+    },
+    {
+      "items": [
+        775
+      ],
+      "support": 3771
+    },
+    {
+      "items": [
+        778
+      ],
+      "support": 2514
+    },
+    {
+      "items": [
+        780
+      ],
+      "support": 2306
+    },
+    {
+      "items": [
+        782
+      ],
+      "support": 2767
+    },
+    {
+      "items": [
+        784
+      ],
+      "support": 1257
+    },
+    {
+      "items": [
+        788
+      ],
+      "support": 2386
+    },
+    {
+      "items": [
+        789
+      ],
+      "support": 4309
+    },
+    {
+      "items": [
+        790
+      ],
+      "support": 1094
+    },
+    {
+      "items": [
+        792
+      ],
+      "support": 1306
+    },
+    {
+      "items": [
+        793
+      ],
+      "support": 3063
+    },
+    {
+      "items": [
+        795
+      ],
+      "support": 3361
+    },
+    {
+      "items": [
+        797
+      ],
+      "support": 2684
+    },
+    {
+      "items": [
+        798
+      ],
+      "support": 3103
+    },
+    {
+      "items": [
+        800
+      ],
+      "support": 1916
+    },
+    {
+      "items": [
+        803
+      ],
+      "support": 2237
+    },
+    {
+      "items": [
+        804
+      ],
+      "support": 1315
+    },
+    {
+      "items": [
+        805
+      ],
+      "support": 1789
+    },
+    {
+      "items": [
+        809
+      ],
+      "support": 2163
+    },
+    {
+      "items": [
+        810
+      ],
+      "support": 1267
+    },
+    {
+      "items": [
+        812
+      ],
+      "support": 1518
+    },
+    {
+      "items": [
+        814
+      ],
+      "support": 1672
+    },
+    {
+      "items": [
+        815
+      ],
+      "support": 1358
+    },
+    {
+      "items": [
+        819
+      ],
+      "support": 1257
+    },
+    {
+      "items": [
+        820
+      ],
+      "support": 1473
+    },
+    {
+      "items": [
+        823
+      ],
+      "support": 1031
+    },
+    {
+      "items": [
+        825
+      ],
+      "support": 3085
+    },
+    {
+      "items": [
+        826
+      ],
+      "support": 2022
+    },
+    {
+      "items": [
+        829
+      ],
+      "support": 6810
+    },
+    {
+      "items": [
+        832
+      ],
+      "support": 2062
+    },
+    {
+      "items": [
+        834
+      ],
+      "support": 1373
+    },
+    {
+      "items": [
+        841
+      ],
+      "support": 1927
+    },
+    {
+      "items": [
+        843
+      ],
+      "support": 1222
+    },
+    {
+      "items": [
+        844
+      ],
+      "support": 2814
+    },
+    {
+      "items": [
+        846
+      ],
+      "support": 1480
+    },
+    {
+      "items": [
+        853
+      ],
+      "support": 1804
+    },
+    {
+      "items": [
+        854
+      ],
+      "support": 2847
+    },
+    {
+      "items": [
+        857
+      ],
+      "support": 1588
+    },
+    {
+      "items": [
+        859
+      ],
+      "support": 1242
+    },
+    {
+      "items": [
+        860
+      ],
+      "support": 1255
+    },
+    {
+      "items": [
+        862
+      ],
+      "support": 3649
+    },
+    {
+      "items": [
+        867
+      ],
+      "support": 1530
+    },
+    {
+      "items": [
+        871
+      ],
+      "support": 2810
+    },
+    {
+      "items": [
+        874
+      ],
+      "support": 2237
+    },
+    {
+      "items": [
+        878
+      ],
+      "support": 2047
+    },
+    {
+      "items": [
+        883
+      ],
+      "support": 4902
+    },
+    {
+      "items": [
+        884
+      ],
+      "support": 1645
+    },
+    {
+      "items": [
+        885
+      ],
+      "support": 3043
+    },
+    {
+      "items": [
+        886
+      ],
+      "support": 3053
+    },
+    {
+      "items": [
+        887
+      ],
+      "support": 1671
+    },
+    {
+      "items": [
+        888
+      ],
+      "support": 3686
+    },
+    {
+      "items": [
+        890
+      ],
+      "support": 1437
+    },
+    {
+      "items": [
+        893
+      ],
+      "support": 1947
+    },
+    {
+      "items": [
+        895
+      ],
+      "support": 3385
+    },
+    {
+      "items": [
+        897
+      ],
+      "support": 1935
+    },
+    {
+      "items": [
+        899
+      ],
+      "support": 1252
+    },
+    {
+      "items": [
+        900
+      ],
+      "support": 1165
+    },
+    {
+      "items": [
+        906
+      ],
+      "support": 1444
+    },
+    {
+      "items": [
+        910
+      ],
+      "support": 1695
+    },
+    {
+      "items": [
+        912
+      ],
+      "support": 1009
+    },
+    {
+      "items": [
+        913
+      ],
+      "support": 1939
+    },
+    {
+      "items": [
+        914
+      ],
+      "support": 4037
+    },
+    {
+      "items": [
+        918
+      ],
+      "support": 3012
+    },
+    {
+      "items": [
+        919
+      ],
+      "support": 3710
+    },
+    {
+      "items": [
+        921
+      ],
+      "support": 2425
+    },
+    {
+      "items": [
+        923
+      ],
+      "support": 1753
+    },
+    {
+      "items": [
+        928
+      ],
+      "support": 1034
+    },
+    {
+      "items": [
+        932
+      ],
+      "support": 1786
+    },
+    {
+      "items": [
+        935
+      ],
+      "support": 1742
+    },
+    {
+      "items": [
+        937
+      ],
+      "support": 4681
+    },
+    {
+      "items": [
+        941
+      ],
+      "support": 1126
+    },
+    {
+      "items": [
+        944
+      ],
+      "support": 2794
+    },
+    {
+      "items": [
+        946
+      ],
+      "support": 1350
+    },
+    {
+      "items": [
+        947
+      ],
+      "support": 3690
+    },
+    {
+      "items": [
+        948
+      ],
+      "support": 1149
+    },
+    {
+      "items": [
+        949
+      ],
+      "support": 1414
+    },
+    {
+      "items": [
+        950
+      ],
+      "support": 1463
+    },
+    {
+      "items": [
+        952
+      ],
+      "support": 1574
+    },
+    {
+      "items": [
+        956
+      ],
+      "support": 3626
+    },
+    {
+      "items": [
+        960
+      ],
+      "support": 2732
+    },
+    {
+      "items": [
+        963
+      ],
+      "support": 1327
+    },
+    {
+      "items": [
+        964
+      ],
+      "support": 1518
+    },
+    {
+      "items": [
+        966
+      ],
+      "support": 3921
+    },
+    {
+      "items": [
+        967
+      ],
+      "support": 1695
+    },
+    {
+      "items": [
+        970
+      ],
+      "support": 2086
+    },
+    {
+      "items": [
+        975
+      ],
+      "support": 1764
+    },
+    {
+      "items": [
+        978
+      ],
+      "support": 1141
+    },
+    {
+      "items": [
+        981
+      ],
+      "support": 1542
+    },
+    {
+      "items": [
+        982
+      ],
+      "support": 1640
+    },
+    {
+      "items": [
+        984
+      ],
+      "support": 1756
+    },
+    {
+      "items": [
+        988
+      ],
+      "support": 1164
+    },
+    {
+      "items": [
+        989
+      ],
+      "support": 1289
+    },
+    {
+      "items": [
+        991
+      ],
+      "support": 1268
+    },
+    {
+      "items": [
+        992
+      ],
+      "support": 1116
+    },
+    {
+      "items": [
+        995
+      ],
+      "support": 1521
+    },
+    {
+      "items": [
+        998
+      ],
+      "support": 2713
+    },
+    {
+      "items": [
+        39,
+        704
+      ],
+      "support": 1107
+    },
+    {
+      "items": [
+        39,
+        825
+      ],
+      "support": 1187
+    },
+    {
+      "items": [
+        217,
+        346
+      ],
+      "support": 1336
+    },
+    {
+      "items": [
+        227,
+        390
+      ],
+      "support": 1049
+    },
+    {
+      "items": [
+        368,
+        682
+      ],
+      "support": 1193
+    },
+    {
+      "items": [
+        368,
+        829
+      ],
+      "support": 1194
+    },
+    {
+      "items": [
+        390,
+        722
+      ],
+      "support": 1042
+    },
+    {
+      "items": [
+        704,
+        825
+      ],
+      "support": 1102
+    },
+    {
+      "items": [
+        789,
+        829
+      ],
+      "support": 1194
+    },
+    {
+      "items": [
+        39,
+        704,
+        825
+      ],
+      "support": 1035
+    }
+  ],
+  "rules": [
+    {
+      "antecedent": [
+        704,
+        825
+      ],
+      "consequent": [
+        39
+      ],
+      "support": 1035,
+      "antecedent_support": 1102,
+      "confidence": 0.9392014519056261
+    },
+    {
+      "antecedent": [
+        39,
+        704
+      ],
+      "consequent": [
+        825
+      ],
+      "support": 1035,
+      "antecedent_support": 1107,
+      "confidence": 0.9349593495934959
+    },
+    {
+      "antecedent": [
+        39,
+        825
+      ],
+      "consequent": [
+        704
+      ],
+      "support": 1035,
+      "antecedent_support": 1187,
+      "confidence": 0.8719460825610783
+    },
+    {
+      "antecedent": [
+        704
+      ],
+      "consequent": [
+        39
+      ],
+      "support": 1107,
+      "antecedent_support": 1794,
+      "confidence": 0.617056856187291
+    },
+    {
+      "antecedent": [
+        704
+      ],
+      "consequent": [
+        825
+      ],
+      "support": 1102,
+      "antecedent_support": 1794,
+      "confidence": 0.6142697881828316
+    }
+  ]
+}
