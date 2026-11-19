@@ -27,10 +27,11 @@ class AprioriTests(unittest.TestCase):
         )
 
         exact_rule = Rule((3,), (1, 2), support=2, antecedent_support=3)
-        rules_at_exact_threshold = list(generate_rules(result.supports, Fraction(2, 3)))
+        rules_at_exact_threshold = generate_rules(result.supports, Fraction(2, 3))
+        self.assertIsInstance(rules_at_exact_threshold, list)
         self.assertIn(exact_rule, rules_at_exact_threshold)
 
-        rules_at_higher_threshold = list(generate_rules(result.supports, Fraction(67, 100)))
+        rules_at_higher_threshold = generate_rules(result.supports, Fraction(67, 100))
         self.assertNotIn(exact_rule, rules_at_higher_threshold)
 
     def test_missing_subset_prunes_the_join(self):
@@ -87,7 +88,7 @@ class AprioriTests(unittest.TestCase):
 
             with self.subTest(trial=trial, support=min_support, confidence=min_confidence):
                 result = apriori(baskets, min_support)
-                actual_rules = list(generate_rules(result.supports, min_confidence))
+                actual_rules = generate_rules(result.supports, min_confidence)
                 self.assertEqual(result.supports, expected_supports)
                 self.assertCountEqual(actual_rules, expected_rules)
 

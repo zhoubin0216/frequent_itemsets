@@ -161,11 +161,12 @@ def apriori(transactions: Iterable[Iterable[int]], min_support: int) -> MiningRe
 
 def generate_rules(
     supports: Mapping[Itemset, int], min_confidence: Fraction
-) -> Iterator[Rule]:
-    """Generate rules from Apriori's complete table of frequent itemset supports."""
+) -> list[Rule]:
+    """Return the rules that meet the minimum confidence."""
     if not 0 <= min_confidence <= 1:
         raise ValueError("minimum confidence must be between 0 and 1")
 
+    rules = []
     for itemset, joint_support in supports.items():
         for antecedent_size in range(1, len(itemset)):
             for antecedent in combinations(itemset, antecedent_size):
@@ -180,9 +181,12 @@ def generate_rules(
                     if item not in antecedent_items:
                         consequent_items.append(item)
 
-                yield Rule(
+                rule = Rule(
                     antecedent=antecedent,
                     consequent=tuple(consequent_items),
                     support=joint_support,
                     antecedent_support=antecedent_support,
                 )
+                rules.append(rule)
+
+    return rules

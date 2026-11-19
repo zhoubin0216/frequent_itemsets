@@ -160,7 +160,7 @@ def main() -> None:
         if args.min_confidence is not None:
             start = perf_counter()
             min_confidence = Fraction(args.min_confidence)
-            rules = list(generate_rules(result.supports, min_confidence))
+            rules = generate_rules(result.supports, min_confidence)
             rules_seconds = perf_counter() - start
             rules.sort(key=rule_output_order)
             print_rule_summary(rules, args.min_confidence, rules_seconds)
