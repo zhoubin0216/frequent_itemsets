@@ -102,14 +102,17 @@ def save_results(args: argparse.Namespace, result: MiningResult, rules: list[Rul
         })
 
     min_confidence = None
+    min_confidence_exact = None
     if args.min_confidence is not None:
         min_confidence = float(args.min_confidence)
+        min_confidence_exact = str(args.min_confidence)
 
     payload = {
         "dataset": args.dataset.name,
         "transaction_count": result.transaction_count,
         "min_support": args.min_support,
         "min_confidence": min_confidence,
+        "min_confidence_exact": min_confidence_exact,
         "levels": level_rows,
         "frequent_itemsets": itemset_rows,
         "rules": rule_rows,
@@ -140,8 +143,12 @@ def main() -> None:
     args = parser.parse_args()
 
     try:
-        if args.output is not None and args.output.resolve() == args.dataset.resolve():
-            parser.error("output path must differ from the input dataset")
+        if args.output is not None:
+            same_file = args.output.resolve() == args.dataset.resolve()
+            if not same_file and args.output.exists():
+                same_file = args.output.samefile(args.dataset)
+            if same_file:
+                parser.error("output path must differ from the input dataset")
 
         start = perf_counter()
         transactions = read_transactions(args.dataset)

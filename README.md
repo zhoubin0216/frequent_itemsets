@@ -41,6 +41,9 @@ different lines count as separate transactions.
 Both thresholds are inclusive. The console shows per-level counts, elapsed
 time and up to five examples of each result type. `--output` saves every
 frequent itemset and rule, with their support counts, to JSON.
+The JSON includes a numeric `min_confidence` for display and the exact decimal
+threshold as a string in `min_confidence_exact`. Both fields are `null` when
+rule generation is disabled.
 
 [REPORT.md](REPORT.md) gives the algorithm and evaluation. The complete example
 output is in [results/t10i4d100k_s1000_c060.json](results/t10i4d100k_s1000_c060.json).
