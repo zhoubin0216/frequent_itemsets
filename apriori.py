@@ -69,6 +69,7 @@ def _join_and_prune(previous_frequent: set[Itemset], size: int) -> set[Itemset]:
         for left, right in combinations(prefix_group, 2):
             # Both itemsets share a prefix. Append the larger of their last items.
             candidate = left + (right[-1],)
+            # A candidate cannot be frequent if any of its subsets is infrequent.
             all_subsets_frequent = True
             for subset in combinations(candidate, size - 1):
                 if subset not in previous_frequent:
@@ -84,6 +85,7 @@ def _join_and_prune(previous_frequent: set[Itemset], size: int) -> set[Itemset]:
 def _count_candidates(
     baskets: list[Itemset], candidates: set[Itemset], size: int
 ) -> dict[Itemset, int]:
+    # Drop items that cannot contribute to a candidate at this level.
     active_items = set()
     for candidate in candidates:
         for item in candidate:
@@ -168,6 +170,7 @@ def generate_rules(
 
     rules = []
     for itemset, joint_support in supports.items():
+        # Split the frequent itemset into a nonempty antecedent and consequent.
         for antecedent_size in range(1, len(itemset)):
             for antecedent in combinations(itemset, antecedent_size):
                 antecedent_support = supports[antecedent]
